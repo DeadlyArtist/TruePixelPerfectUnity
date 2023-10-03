@@ -11,14 +11,16 @@ public class TruePixelPerfect : MonoBehaviour
 	public int maxVerticalSpritePixels = 256;
 
 	private int pixelsPerSpritePixel = 4;
+
+	// Inspector Only
 	private float unevenPixelHeightOffset = 0;
 	private float unevenPixelWidthOffset = 0;
 	private Rect pixelRect;
 
 	private Camera r_camera;
 
-    void Awake()
-    {
+    	void Awake()
+    	{
 		r_camera = GetComponent<Camera>();
 		UpdateCamera();
 	}
@@ -40,7 +42,7 @@ public class TruePixelPerfect : MonoBehaviour
 	{
 		RenderPipelineManager.beginCameraRendering -= OnBeginCameraRendering;
 
-		transform.position -= new Vector3(unevenPixelWidthOffset, unevenPixelHeightOffset, 0);
+		transform.position = new Vector3(0, 0, transform.position.z);
 		unevenPixelHeightOffset = 0;
 		unevenPixelWidthOffset = 0;
 
@@ -49,7 +51,7 @@ public class TruePixelPerfect : MonoBehaviour
 	}
 
 	void UpdateCamera()
-    {
+    	{
 		var pixelRect = r_camera.pixelRect;
 		this.pixelRect = pixelRect;
 
@@ -59,13 +61,13 @@ public class TruePixelPerfect : MonoBehaviour
 		float ortographicSize = pixelRect.height / (pixelsPerSpritePixel * spritePixelsPerUnit);
 		r_camera.orthographicSize = ortographicSize / 2;
 
-		transform.position -= new Vector3(unevenPixelWidthOffset, unevenPixelHeightOffset, 0);
+		var newPosition = new Vector3(0, 0, transform.position.z);
 		if (pixelRect.height % 2 != 0)
 		{
 			float unevenPixelHeightOffset = 1f / (pixelsPerSpritePixel * spritePixelsPerUnit * 2);
 			this.unevenPixelHeightOffset = unevenPixelHeightOffset;
 
-			transform.position += new Vector3(0, unevenPixelHeightOffset, 0);
+			newPosition += new Vector3(0, unevenPixelHeightOffset, 0);
 		}
 		else
 		{
@@ -76,11 +78,13 @@ public class TruePixelPerfect : MonoBehaviour
 			float unevenPixelWidthOffset = 1f / (pixelsPerSpritePixel * spritePixelsPerUnit * 2);
 			this.unevenPixelWidthOffset = unevenPixelWidthOffset;
 
-			transform.position += new Vector3(unevenPixelWidthOffset, 0, 0);
+			newPosition += new Vector3(unevenPixelWidthOffset, 0, 0);
 		}
 		else
 		{
 			this.unevenPixelWidthOffset = 0;
 		}
+
+		transform.position = newPosition;
 	}
 }
