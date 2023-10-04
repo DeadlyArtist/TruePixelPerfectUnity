@@ -9,5 +9,6 @@ A true pixel perfect camera implementation for unity.
 
 ### Important
 - This script modifies the position, so it is advised to not directly move the camera, instead only move it indirectly via a parent.
-- If you don't move all objects including the camera (parent) to only valid positions (multiples of 1 / (spritePixelsPerUnit * pixelsPerSpritePixel)) at all times, this doesn't work.
 - Cinemachine, inbuilt PixelPerfectCamera and anything else that modifies position or orthogonal size are incompatible with this.
+- If movement appears blurry, it is because the camera updates at a different rate than the movement. This can be fixed by doing stuff in Update instead of FixedUpdate or by enabling interpolation on your Rigidbody2D.
+- Enable GridSnapping in Scene view and set it to 1 / "Sprite Pixels Per Unit".
