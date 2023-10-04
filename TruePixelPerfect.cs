@@ -42,7 +42,7 @@ public class TruePixelPerfect : MonoBehaviour
 	{
 		RenderPipelineManager.beginCameraRendering -= OnBeginCameraRendering;
 
-		transform.position = new Vector3(0, 0, transform.position.z);
+		transform.localPosition = new Vector3(0, 0, transform.localPosition.z);
 		unevenPixelHeightOffset = 0;
 		unevenPixelWidthOffset = 0;
 
@@ -61,7 +61,7 @@ public class TruePixelPerfect : MonoBehaviour
 		float ortographicSize = pixelRect.height / (pixelsPerSpritePixel * spritePixelsPerUnit);
 		r_camera.orthographicSize = ortographicSize / 2;
 
-		var newPosition = new Vector3(0, 0, transform.position.z);
+		var newPosition = new Vector3(0, 0, transform.localPosition.z);
 		if (pixelRect.height % 2 != 0)
 		{
 			float unevenPixelHeightOffset = 1f / (pixelsPerSpritePixel * spritePixelsPerUnit * 2);
@@ -85,6 +85,6 @@ public class TruePixelPerfect : MonoBehaviour
 			this.unevenPixelWidthOffset = 0;
 		}
 
-		transform.position = newPosition;
+		transform.localPosition = newPosition;
 	}
 }
