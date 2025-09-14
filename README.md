@@ -5,7 +5,7 @@ Features:
 - Allows seemlessly switching between pixel perfect and normal
 - Handles GUI separately
 - Allows rescaling GUI based on user defined settings
-- Shows subpixels for maximum smoothness of movement
+- Retains subpixels for maximum smoothness of movement
 - Allows freely resizing the screen without any cropping or errors (Offsets the camera in case of uneven pixel counts)
 - Big API full of convenience
 
