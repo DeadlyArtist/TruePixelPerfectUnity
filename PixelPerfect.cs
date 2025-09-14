@@ -10,8 +10,8 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class PixelPerfect : PersistentSingleton<PixelPerfect>
 {
-	public static bool Enabled => GameSettings.PixelPerfect && PerfectPixelsPerUnit != 0;
-	public static bool GUIEnabled => GameSettings.PixelPerfectGUI && PerfectPixelsPerUnit != 0;
+	public static bool Enabled => enabled && PerfectPixelsPerUnit != 0;
+	public static bool GUIEnabled => guiEnabled && PerfectPixelsPerUnit != 0;
 	public static Rect PixelRect { get; private set; }
 	public static int SpritePixelsPerUnit => Instance.spritePixelsPerUnit;
 	public static float UnitsPerSpritePixel { get; private set; }
@@ -50,7 +50,8 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 	public static float UnitsPerGUIUnit { get; private set; }
 
 
-	[SerializeField][Display(nameof(Enabled))] private new bool enabled;
+	[SerializeField] private new bool enabled;
+	[SerializeField] private bool guiEnabled;
 	[SerializeField][Display(nameof(UnitsPerSpritePixel))] private float unitsPerSpritePixel;
 	[SerializeField] private int spritePixelsPerUnit = 16;
 	[SerializeField] private int maxVerticalSpritePixels = 180;
