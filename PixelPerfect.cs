@@ -10,14 +10,14 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class PixelPerfect : PersistentSingleton<PixelPerfect>
 {
-	public static bool Enabled => Instance.enabled && PerfectPixelsPerUnit != 0;
-	public static bool GUIEnabled => Instance.guiEnabled && PerfectPixelsPerUnit != 0;
+	public static bool Enabled { get => Instance.enabled && PerfectPixelsPerUnit != 0; set => Instance.enabled = value; }
+	public static bool GUIEnabled { get => Instance.guiEnabled && PerfectPixelsPerUnit != 0; set => Instance.enabled = value; }
 	public static Rect PixelRect { get; private set; }
-	public static int SpritePixelsPerUnit => Instance.spritePixelsPerUnit;
+	public static int SpritePixelsPerUnit { get => Instance.spritePixelsPerUnit; set => Instance.spritePixelsPerUnit = value; }
 	public static float UnitsPerSpritePixel { get; private set; }
-	public static int MaxVerticalSpritePixels => Instance.maxVerticalSpritePixels;
-	public static int TargetGUISizeReduction => Instance.targetGUISizeReduction;
-	public static float GuiScale => Instance.guiScale;
+	public static int MaxVerticalSpritePixels { get => Instance.maxVerticalSpritePixels; set => Instance.maxVerticalSpritePixels = value; }
+	public static int TargetGUISizeReduction { get => Instance.targetGUISizeReduction; set => Instance.targetGUISizeReduction = value; }
+	public static float GuiScale { get => Instance.guiScale; set => Instance.guiScale = value; }
 
 	// For pixel perfect
 	public static int PerfectPixelsPerUnit { get; private set; }
