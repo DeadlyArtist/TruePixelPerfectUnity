@@ -138,7 +138,7 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 		ImperfectUnitsPerPixel = 1f / ImperfectPixelsPerUnit;
 
 		ReferenceResolution = new Vector2(MaxVerticalSpritePixels * AspectRatio, MaxVerticalSpritePixels);
-		ImperfectGUIUnitsPerSpritePixel = ImperfectPixelsPerSpritePixel * GuiScale;
+		ImperfectGUIUnitsPerSpritePixel = ImperfectPixelsPerSpritePixel * GUIScale;
 		ImperfectGUIUnitsPerUnit = ImperfectGUIUnitsPerSpritePixel * SpritePixelsPerUnit;
 		ImperfectGUIUnitsPerPixel = 1f / ImperfectGUIUnitsPerUnit;
 
@@ -218,7 +218,7 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 		else
 		{
 			scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-			scaler.referenceResolution = ReferenceResolution / GameSettings.GuiScale;
+			scaler.referenceResolution = ReferenceResolution / GUIScale;
 		}
 	}
 
