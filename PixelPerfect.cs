@@ -50,8 +50,8 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 	public static float UnitsPerGUIUnit { get; private set; }
 
 
-	[SerializeField] private new bool enabled;
-	[SerializeField] private bool guiEnabled;
+	[SerializeField] private new bool enabled = true;
+	[SerializeField] private bool guiEnabled = true;
 	[SerializeField][Display(nameof(UnitsPerSpritePixel))] private float unitsPerSpritePixel;
 	[SerializeField] private int spritePixelsPerUnit = 16;
 	[SerializeField] private int maxVerticalSpritePixels = 180;
