@@ -17,7 +17,7 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 	public static float UnitsPerSpritePixel { get; private set; }
 	public static int MaxVerticalSpritePixels { get => Instance.maxVerticalSpritePixels; set => Instance.maxVerticalSpritePixels = value; }
 	public static int TargetGUISizeReduction { get => Instance.targetGUISizeReduction; set => Instance.targetGUISizeReduction = value; }
-	public static float GuiScale { get => Instance.guiScale; set => Instance.guiScale = value; }
+	public static float GUIScale { get => Instance.guiScale; set => Instance.guiScale = value; }
 
 	// For pixel perfect
 	public static int PerfectPixelsPerUnit { get; private set; }
@@ -128,7 +128,7 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 		UnevenPixelHeightOffset = (PixelRect.height % 2 != 0) ? PerfectUnitsPerPixel / 2f : 0f;
 		UnevenPixelWidthOffset = (PixelRect.width % 2 != 0) ? PerfectUnitsPerPixel / 2f : 0f;
 
-		PerfectGUIUnitsPerSpritePixel = Mathf.Max(1, PerfectPixelsPerSpritePixel - GameSettings.TargetGUISizeReduction);
+		PerfectGUIUnitsPerSpritePixel = Mathf.Max(1, PerfectPixelsPerSpritePixel - TargetGUISizeReduction);
 		PerfectGUIUnitsPerUnit = PerfectGUIUnitsPerSpritePixel * SpritePixelsPerUnit;
 		PerfectGUIUnitsPerPixel = 1f / PerfectGUIUnitsPerUnit;
 
@@ -138,7 +138,7 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 		ImperfectUnitsPerPixel = 1f / ImperfectPixelsPerUnit;
 
 		ReferenceResolution = new Vector2(MaxVerticalSpritePixels * AspectRatio, MaxVerticalSpritePixels);
-		ImperfectGUIUnitsPerSpritePixel = ImperfectPixelsPerSpritePixel * GameSettings.GuiScale;
+		ImperfectGUIUnitsPerSpritePixel = ImperfectPixelsPerSpritePixel * GuiScale;
 		ImperfectGUIUnitsPerUnit = ImperfectGUIUnitsPerSpritePixel * SpritePixelsPerUnit;
 		ImperfectGUIUnitsPerPixel = 1f / ImperfectGUIUnitsPerUnit;
 
