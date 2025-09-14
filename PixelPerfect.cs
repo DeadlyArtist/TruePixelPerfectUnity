@@ -10,12 +10,14 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class PixelPerfect : PersistentSingleton<PixelPerfect>
 {
-	public static bool Enabled => enabled && PerfectPixelsPerUnit != 0;
-	public static bool GUIEnabled => guiEnabled && PerfectPixelsPerUnit != 0;
+	public static bool Enabled => Instance.enabled && PerfectPixelsPerUnit != 0;
+	public static bool GUIEnabled => Instance.guiEnabled && PerfectPixelsPerUnit != 0;
 	public static Rect PixelRect { get; private set; }
 	public static int SpritePixelsPerUnit => Instance.spritePixelsPerUnit;
 	public static float UnitsPerSpritePixel { get; private set; }
 	public static int MaxVerticalSpritePixels => Instance.maxVerticalSpritePixels;
+	public static int TargetGUISizeReduction => Instance.targetGUISizeReduction;
+	public static float GuiScale => Instance.guiScale;
 
 	// For pixel perfect
 	public static int PerfectPixelsPerUnit { get; private set; }
@@ -55,6 +57,8 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 	[SerializeField][Display(nameof(UnitsPerSpritePixel))] private float unitsPerSpritePixel;
 	[SerializeField] private int spritePixelsPerUnit = 16;
 	[SerializeField] private int maxVerticalSpritePixels = 180;
+	[SerializeField] private int targetGUISizeReduction = 0;
+	[SerializeField][Range(0.1f, 1f)] private float guiScale = 1f;
 
 	//[SerializeField][Display(nameof(PerfectPixelsPerUnit))] private int perfectPixelsPerUnit;
 	//[SerializeField][Display(nameof(PerfectUnitsPerPixel))] private float perfectUnitsPerPixel;
