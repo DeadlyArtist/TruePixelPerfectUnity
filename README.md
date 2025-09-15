@@ -17,7 +17,7 @@ Features:
 1. Add the CameraUpdater component to your camera
 1. Create a dedicated parent for your Camera and add the SnapToGrid component to its dedicated parent
 1. Set "Sprite Pixels Per Unit" to the "Pixels Per Unit" setting of your sprite assets
-1. Set "Max Vertical Sprite Pixels" to how many pixels should at maximum be on the screen vertically
+1. Set "Max Vertical Sprite Pixels" to how many pixels should at maximum be on the screen vertically (should be a factor of 1080, such as 180)
 1. Add the CanvasScaler and CanvasScalerUpdater components to all your canvases
 
 ## Help
