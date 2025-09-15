@@ -22,9 +22,9 @@ Features:
 
 ## Help
 - Make sure all sprites which should snap to pixels have a SnapToGrid component on their dedicated parent
-- Make sure all moving rigidbodies are set to interpolate
-- Make sure Physics2D simulation mode in General Settings (Project Settings) is set to FixedUpdate, and that all rigidbody moving is done in FixedUpdate
 - Make sure you are not directly moving the camera or any object with the SnapToGrid component (instead move its real location)
 - Enable GridSnapping in Scene view and set it to 1 / "Sprite Pixels Per Unit"
+- Make sure all moving rigidbodies are set to interpolate
+- Make sure Physics2D simulation mode in General Settings (Project Settings) is set to FixedUpdate, and that all rigidbody moving is done in FixedUpdate
 - If movement is stuttering, it could be because rigidbody is selected in Scene view. Minimal stuttering can also be caused by the editor and go away in the build.
 - Cinemachine, inbuilt PixelPerfectCamera, and anything else that modifies camera position or orthogonal size are incompatible with this
