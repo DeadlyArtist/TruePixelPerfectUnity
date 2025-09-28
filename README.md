@@ -29,4 +29,4 @@ Features:
 - Make sure Physics2D simulation mode in General Settings (Project Settings) is set to FixedUpdate, and that all rigidbody moving is done in FixedUpdate
 - If movement is stuttering, it could be because rigidbody is selected in Scene view. Minimal stuttering can also be caused by the editor and go away in the build.
 - Cinemachine, inbuilt PixelPerfectCamera, and anything else that modifies camera position or orthogonal size are incompatible with this
-- If you move UI components on canvas according to real position, ensure all movement is done after CanvasUpdater
+- If you move UI components on Canvas according to real position, ensure all movement is done after CanvasUpdater
