@@ -18,7 +18,8 @@ Features:
 1. Create a dedicated parent for your Camera and add the SnapToGrid component to its dedicated parent
 1. Set "Sprite Pixels Per Unit" to the "Pixels Per Unit" setting of your sprite assets
 1. Set "Max Vertical Sprite Pixels" to how many pixels should at maximum be on the screen vertically (should be a factor of 1080, such as 180)
-1. Add the CanvasScaler and CanvasScalerUpdater components to all your canvases
+1. Add the CanvasScaler and CanvasUpdater components to all your canvases, and set the camera they should render to
+1. Set all Script Execution Orders to their DefaultExecutionOrder
 
 ## Help
 - Make sure all sprites which should snap to pixels have a SnapToGrid component on their dedicated parent
@@ -28,3 +29,4 @@ Features:
 - Make sure Physics2D simulation mode in General Settings (Project Settings) is set to FixedUpdate, and that all rigidbody moving is done in FixedUpdate
 - If movement is stuttering, it could be because rigidbody is selected in Scene view. Minimal stuttering can also be caused by the editor and go away in the build.
 - Cinemachine, inbuilt PixelPerfectCamera, and anything else that modifies camera position or orthogonal size are incompatible with this
+- If you move UI components on canvas according to real position, ensure all movement is done after CanvasUpdater

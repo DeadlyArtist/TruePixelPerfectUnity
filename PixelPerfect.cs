@@ -207,6 +207,30 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 		camera.transform.localPosition = new Vector3(0, 0, camera.transform.localPosition.z);
 	}
 
+	public static void UpdateCanvasToMatchCamera(Canvas canvas)
+	{
+		if (canvas.renderMode != RenderMode.WorldSpace) return;
+
+		var camera = canvas.worldCamera;
+		if (camera == null) return;
+
+		var pixelRatio = PixelsPerUnit / GUIUnitsPerSpritePixel;
+
+		// Lock the canvas to the camera
+		var canvasTransform = canvas.transform;
+		canvasTransform.position = camera.transform.position + new Vector3(0, 0, 100);
+		canvasTransform.rotation = camera.transform.rotation;
+		var rectTransform = canvas.GetRectTransform();
+		rectTransform.localScale = 1f / pixelRatio * Vector2.one;
+		var cameraRect = camera.rect;
+		float fullHeight = camera.orthographicSize * 2f;
+		float fullWidth = fullHeight * camera.aspect;
+		var newSize = new Vector2(fullWidth, fullHeight);
+		newSize *= pixelRatio;
+
+		rectTransform.sizeDelta = newSize;
+	}
+
 	public static void UpdateCanvasScaler(CanvasScaler scaler)
 	{
 		if (GUIEnabled)
@@ -219,6 +243,42 @@ public class PixelPerfect : PersistentSingleton<PixelPerfect>
 		{
 			scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 			scaler.referenceResolution = ReferenceResolution / GUIScale;
+		}
+	}
+
+	public static Vector2 WorldPositionToCanvasPosition(Canvas canvas, Vector2 worldPos)
+	{
+		var canvasRect = canvas.GetRectTransform();
+
+		if (canvas.renderMode == RenderMode.WorldSpace)
+		{
+			// fast path for World Space canvas
+			return canvasRect.InverseTransformPoint(worldPos);
+		}
+		else
+		{
+			// Screen Space (camera or overlay)
+			var camera = canvas.worldCamera;
+			Vector3 screenPos = camera.WorldToScreenPoint(worldPos);
+			RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPos, camera, out Vector2 localPos);
+			return localPos;
+		}
+	}
+
+	public static Vector2 CanvasPositionToWorldPosition(Canvas canvas, Vector2 canvasLocalPos)
+	{
+		var canvasRect = canvas.GetRectTransform();
+		if (canvas.renderMode == RenderMode.WorldSpace)
+		{
+			// fast path for World Space canvas
+			return canvasRect.TransformPoint(canvasLocalPos);
+		}
+		else
+		{
+			// screen-space canvas: need to reproject through the camera
+			var camera = canvas.worldCamera;
+			RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRect, canvasLocalPos, camera, out var worldPos);
+			return worldPos;
 		}
 	}
 
